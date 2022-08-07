@@ -3,9 +3,10 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native"
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("")
+  const [goalsList, setGoalsList] = useState<string[]>([])
 
   function onAddGoal() {
-    console.log(enteredGoal)
+    setGoalsList((prev) => [...prev, enteredGoal])
   }
 
   return (
@@ -19,7 +20,9 @@ export default function App() {
         <Button title="Add Goal" onPress={onAddGoal} />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>List of goals....</Text>
+        {goalsList.map((goal) => (
+          <Text key={`${goal}_1`}>{goal}</Text>
+        ))}
       </View>
     </View>
   )
