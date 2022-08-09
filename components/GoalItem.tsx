@@ -1,14 +1,24 @@
-import { ListRenderItemInfo, StyleSheet, Text, View } from "react-native"
+import {
+  ListRenderItemInfo,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native"
+import { Goal } from "../App"
 
 type Props = {
-  itemData: ListRenderItemInfo<string>
+  itemData: ListRenderItemInfo<Goal>
+  onGoalPress: (id: string) => void
 }
 
-export function GoalItem({ itemData }: Props) {
+export function GoalItem({ itemData, onGoalPress }: Props) {
   return (
-    <View style={styles.goalItem}>
-      <Text style={styles.goalText}>{itemData.item}</Text>
-    </View>
+    <Pressable onPress={() => onGoalPress(itemData.item.id)}>
+      <View style={styles.goalItem}>
+        <Text style={styles.goalText}>{itemData.item.text}</Text>
+      </View>
+    </Pressable>
   )
 }
 
