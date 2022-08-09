@@ -1,40 +1,22 @@
 import { useState } from "react"
-import {
-  Button,
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native"
+import { FlatList, StyleSheet, View } from "react-native"
+import { GoalInput } from "./components/GoalInput"
+import { GoalItem } from "./components/GoalItem"
 
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState("")
   const [goalsList, setGoalsList] = useState<string[]>([])
 
-  function onAddGoal() {
-    setGoalsList((prev) => [...prev, enteredGoal])
+  function onAddGoal(goal: string) {
+    setGoalsList((prev) => [...prev, goal])
   }
 
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Your course goal!!"
-          onChangeText={setEnteredGoal}
-        />
-        <Button title="Add Goal" onPress={onAddGoal} />
-      </View>
+      <GoalInput addGoalToList={onAddGoal} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goalsList}
-          renderItem={(itemData) => (
-            <View style={styles.goalItem}>
-              <Text style={styles.goalText}>{itemData.item}</Text>
-            </View>
-          )}
+          renderItem={(itemData) => <GoalItem itemData={itemData} />}
           keyExtractor={(item, index) => `${item}_${index}`}
         />
       </View>
@@ -48,32 +30,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
   },
-  inputContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 2,
-    marginBottom: 16,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    flexGrow: 1,
-    marginRight: 8,
-    padding: 8,
-  },
   goalsContainer: {
     flex: 5,
-  },
-  goalItem: {
-    margin: 8,
-    borderRadius: 6,
-    padding: 8,
-    backgroundColor: "#5e0acc",
-  },
-  goalText: {
-    color: "white",
   },
 })
