@@ -14,11 +14,15 @@ type Props = {
 
 export function GoalItem({ itemData, onGoalPress }: Props) {
   return (
-    <Pressable onPress={() => onGoalPress(itemData.item.id)}>
-      <View style={styles.goalItem}>
+    <View style={styles.goalItem}>
+      <Pressable
+        android_ripple={{ color: "#210644" }}
+        onPress={() => onGoalPress(itemData.item.id)}
+        style={({ pressed }) => pressed && styles.pressedItem}
+      >
         <Text style={styles.goalText}>{itemData.item.text}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   )
 }
 
@@ -26,10 +30,13 @@ const styles = StyleSheet.create({
   goalItem: {
     margin: 8,
     borderRadius: 6,
-    padding: 8,
     backgroundColor: "#5e0acc",
   },
+  pressedItem: {
+    opacity: 0.5,
+  },
   goalText: {
+    padding: 8,
     color: "white",
   },
 })
