@@ -32,7 +32,11 @@ export default function App() {
         color="#5e0acc"
         onPress={() => setStartAddGoal(true)}
       />
-      <GoalInput addGoalToList={onAddGoal} visible={startAddGoal} />
+      <GoalInput
+        addGoalToList={onAddGoal}
+        visible={startAddGoal}
+        closeGoalModal={() => setStartAddGoal(false)}
+      />
       <View style={styles.goalsContainer}>
         <FlatList
           data={goalsList}

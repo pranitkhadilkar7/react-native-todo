@@ -4,9 +4,10 @@ import { Button, Modal, StyleSheet, TextInput, View } from "react-native"
 type Props = {
   addGoalToList: (goal: string) => void
   visible: boolean
+  closeGoalModal: () => void
 }
 
-export function GoalInput({ addGoalToList, visible }: Props) {
+export function GoalInput({ addGoalToList, visible, closeGoalModal }: Props) {
   const [enteredGoal, setEnteredGoal] = useState("")
 
   function onAddGoal() {
@@ -28,7 +29,7 @@ export function GoalInput({ addGoalToList, visible }: Props) {
             <Button title="Add Goal" onPress={onAddGoal} />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={() => {}} />
+            <Button title="Cancel" onPress={closeGoalModal} />
           </View>
         </View>
       </View>
